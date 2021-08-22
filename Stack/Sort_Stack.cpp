@@ -25,6 +25,7 @@ void insertSort(stack<int> &s,int e)
         s.push(temp);
     }
 }
+
 void Print(stack<int> &s)
 {
     while(s.empty()==false)
@@ -41,7 +42,9 @@ int main(){
     s.push(4);
     s.push(9);
     s.push(2);
+    //Print(s);
     sort(s);
+    // Print(s);
     Print(s);
 
 }
