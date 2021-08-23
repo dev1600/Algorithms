@@ -12,6 +12,7 @@ struct node{
         this->cost=cost;
     }
 };
+//Below is custom comparator for multiset used as priority queue
 struct cmp{
     bool operator()(const node &a,const node &b)
     {
@@ -19,7 +20,7 @@ struct cmp{
     }
 };
 int V;
-vector<pair<int,int>>mst[6];
+vector<pair<int,int>>mst[10];
 void addEdge(vector<pair<int,int>>graph[],int u,int v,int cost)
 {
     graph[u].push_back({v,cost});
@@ -34,29 +35,39 @@ void Prim(vector<pair<int,int>>graph[])
     {
         node e=*(pq.begin());
         pq.erase(pq.begin());
+        
         if(visited[e.u]==true)
             continue;
+    
         visited[e.u]=true;
         mst[e.u].push_back({e.v,e.cost});
-        // cout<<e.u<<" "<<e.v<<" Cost= "<<e.cost<<endl;
+
         for(auto i=graph[e.u].begin();i!=graph[e.u].end();i++)
         {
             
             if(visited[i->first]==true)
                 continue;
             pq.insert(node(i->first,e.u,i->second));
-            // cout<<i->first<<endl;
         }
     }
 }
 int main(){
-    V=5;
+    V=9;
     vector<pair<int,int>> graph[V];
-    addEdge(graph,0,1,5);
-    addEdge(graph,1,2,10);
-    addEdge(graph,1,4,25);
-    addEdge(graph,2,3,15);
-    addEdge(graph,2,4,5);
+    addEdge(graph,0,1,4);
+    addEdge(graph,0,7,8);
+    addEdge(graph,1,2,8);
+    addEdge(graph,1,7,11);
+    addEdge(graph,7,8,7);
+    addEdge(graph,7,6,1);
+    addEdge(graph,2,8,2);
+    addEdge(graph,2,5,4);
+    addEdge(graph,2,3,7);
+    addEdge(graph,6,5,2);
+    addEdge(graph,6,8,6);
+    addEdge(graph,5,3,14);
+    addEdge(graph,5,4,10);
+    addEdge(graph,3,4,9);
     Prim(graph);
     for(int i=0;i<V;i++)
     {
