@@ -24,7 +24,7 @@ int find_set(int v)
         return v;
     parent[v]=find_set(parent[v]);
 }
-bool union_set(int a,int b)
+void union_set(int a,int b)
 {
     a=find_set(a);
     b=find_set(b);
@@ -39,7 +39,7 @@ bool union_set(int a,int b)
         size[a]+=size[b];
     }
 }
-bool isCyclic(vector<pair<int,int>>edges)
+bool isCyclic(vector<pair<int,int>> &edges)
 {
     for(auto i:edges)
     {
@@ -55,7 +55,7 @@ int main(){
     int V=5;
     vector<pair<int,int>>edges;
     set_value(V);
-    //edges.push_back({0,1});
+    edges.push_back({0,1});
     edges.push_back({0,3});
     edges.push_back({1,2});
     edges.push_back({2,4});
